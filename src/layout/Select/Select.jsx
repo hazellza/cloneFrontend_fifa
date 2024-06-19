@@ -25,7 +25,7 @@ function Select() {
             <h1>Home</h1>
           </div>
           <div className="list-pot h-4/5 w-full bg-neutral rounded-box p-5 gap-2 space-y-2 text-white flex  flex-col">
-            <div className="flex items-center justify-between mx-8">
+            <div className="flex justify-center items-center gap-4 mx-8">
               <div className="pot btn w-64 h-24">
                 <label></label>
               </div>
@@ -49,7 +49,7 @@ function Select() {
                 </button>
               </div>
             </div>
-            <div className="flex items-center justify-between mx-8">
+            <div className="flex justify-center items-center gap-4 mx-8">
               <div className="pot btn w-64 h-24">
                 <label></label>
               </div>

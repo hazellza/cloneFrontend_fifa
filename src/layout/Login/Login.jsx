@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Login.css";
 import Logo from "../../components/Logo/Logo";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const URL = "http://localhost:5000/api/auth";
 
@@ -16,6 +18,7 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const showError = () => {
     document.querySelector(".error-message").classList.remove("hidden");
@@ -53,13 +56,24 @@ function Login() {
         })
         .then((result) => {
           console.log("SignIn success : ", result);
-          alert("Login Successfully.");
-          localStorage.setItem("customer", JSON.stringify(result));
-          window.location.href = "/select";
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          }).then(() => {
+            localStorage.setItem("customer", JSON.stringify(result));
+            navigate("/select")
+          });
         })
         .catch((e) => {
           console.log("**CATCH Error(SignIn) : ", e);
-          alert(e.message);
+          Swal.fire({
+            icon: "error",
+            title: "Login Fail",
+            text: "Invalid email or password",
+          });
         });
     }
   };
@@ -182,15 +196,18 @@ function Login() {
             </label>
           </div>
           <div className="text-end">
-            <label className="text-xs">
+            <label className="text-sm">
               Don't have an account?
-              <a href={"/register"} className="font-bold ml-1">
+              <a
+                href={"/register"}
+                className="font-bold ml-1 underline underline-offset-1"
+              >
                 Sign up
               </a>
             </label>
           </div>
           <div className="flex justify-center">
-            <button type="submit" className="btn btn-neutral w-64 text-white">
+            <button type="submit" className="btn btn-neutral w-64 text-white ">
               Login
             </button>
           </div>

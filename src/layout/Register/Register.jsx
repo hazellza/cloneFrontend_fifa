@@ -1,21 +1,43 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./Register.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import Logo from "../../components/Logo/Logo";
 
 const URL = "http://localhost:5000/api/customer";
 
 function register() {
+  const navigate = useNavigate();
+  const showError = () => {
+    document.querySelector(".not-match").classList.remove("hidden");
+  };
+  const delError = () => {
+    document.querySelector(".not-match").classList.add("hidden");
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Register สำหรับการ submit ฟอร์ม
+    console.log(fname, lname, email, displayname, password, conpassword);
+    if (password != conpassword) {
+      showError();
+    } else {
+      delError();
+      Swal.fire({
+        title: "Register success!!",
+        text: "Do you want to continue",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        navigate("/");
+      });
+    }
   };
-
-  const [displayname, setdisplayname] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
+  const [displayname, setDisplayname] = useState("");
   const [password, setPassword] = useState("");
+  const [conpassword, setConpassword] = useState("");
 
   return (
     <section
@@ -37,10 +59,12 @@ function register() {
             >
               <input
                 type="text"
-                id="firstname"
-                name="firstname"
-                className="grow"
+                id="fname"
+                name="fname"
+                className="grow overflow-hidden"
                 placeholder="First-Name"
+                value={fname}
+                onChange={(e) => setFname(e.target.value)}
                 required
               />
             </label>
@@ -50,9 +74,11 @@ function register() {
             >
               <input
                 type="text"
-                id="lastname"
-                name="lastname"
-                className="grow"
+                id="lname"
+                name="lname"
+                className="grow overflow-hidden"
+                value={lname}
+                onChange={(e) => setLname(e.target.value)}
                 placeholder="Last-Name"
                 required
               />
@@ -67,7 +93,9 @@ function register() {
                 type="email"
                 id="email"
                 name="email"
-                className="grow"
+                className="grow overflow-hidden"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email ( gmail , hotmail )"
                 required
               />
@@ -75,15 +103,17 @@ function register() {
           </div>
           <div className="form-group">
             <label
-              htmlFor="username"
+              htmlFor="displayname"
               className="input input-bordered flex item-center gap-2 w-auto"
             >
               <input
                 type="text"
-                id="username"
-                name="username"
-                className="grow"
-                placeholder="Username"
+                id="displayname"
+                name="displayname"
+                className="grow overflow-hidden"
+                value={displayname}
+                onChange={(e) => setDisplayname(e.target.value)}
+                placeholder="Displayname"
                 required
               />
             </label>
@@ -97,7 +127,9 @@ function register() {
                 type="password"
                 id="password"
                 name="password"
-                className="grow"
+                className="grow overflow-hidden"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
                 required
               />
@@ -112,25 +144,37 @@ function register() {
                 type="password"
                 id="con-password"
                 name="con-password"
-                className="grow"
+                className="grow overflow-hidden"
+                value={conpassword}
+                onChange={(e) => setConpassword(e.target.value)}
                 placeholder="Confirm-Password"
                 required
               />
             </label>
           </div>
           <div className="checkbox-confirm flex justify-end">
-            <label className="label cursor-pointer gap-2 -mt-4">
+            <label className="label cursor-pointer gap-2 -mt-4 -mb-6">
               <span className="label text-sm">Confirm</span>
               <input type="checkbox" className="checkbox" required />
+            </label>
+          </div>
+          <div className="text-right">
+            <label className="not-match text-sx font-semibold text-red-700 hidden">
+              invalid password not match
             </label>
           </div>
           <div className="flex justify-center">
             <button
               type="submit"
-              className="btn btn-neutral w-64 text-white -mt-4 register"
+              className="btn btn-neutral w-64 text-white register"
             >
               Register
             </button>
+          </div>
+          <div className="text-end">
+            <label className="text-sm">
+              Already have an account?<a href="/" className="font-bold ml-1 underline underline-offset-1">Sign in</a>
+            </label>
           </div>
         </form>
       </div>

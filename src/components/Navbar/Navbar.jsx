@@ -1,9 +1,13 @@
 import React from "react";
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const URL = "http://localhost:5000/api/auth";
 
 function Navbar() {
+  const navigate = useNavigate();
+
   const handleClick = (e) => {
     e.preventDefault();
     fetch(URL + "/logout", {
@@ -22,13 +26,24 @@ function Navbar() {
       })
       .then((result) => {
         console.log("SignOut success : ", result);
-        alert("Logout Successfully.");
-        localStorage.removeItem("customer");
-        window.location.href = "/";
+        Swal.fire({
+          title: "Do you want to Logout ?",
+          showCancelButton: true,
+          confirmButtonText: "Logout",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            localStorage.removeItem("customer");
+            navigate("/");
+          }
+        });
       })
       .catch((e) => {
         console.log("**CATCH Error (SignOut) : ", e);
-        alert(e.message);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: e.message,
+        });
       });
   };
 
@@ -36,7 +51,7 @@ function Navbar() {
     <section id="navbar">
       <div className="navbar bg-base-100 flex justify-between items-center rounded-box shadow-lg">
         <div className="flex">
-          <a className="btn btn-ghost text-2xl font-bold topic">Green World</a>
+          <a href="/select" className="btn btn-ghost text-2xl font-bold topic">Green World</a>
         </div>
         <div className="flex">
           <div className="dropdown dropdown-end">
@@ -57,7 +72,7 @@ function Navbar() {
               className="menu dropdown-content mt-4 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Settings</a>
+                <a href="/setting">Settings</a>
               </li>
               <li>
                 <a type="submit" onClick={handleClick}>
