@@ -27,7 +27,7 @@ function register() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(fname, lname, email, displayname, password, conpassword);
+    console.log(email, displayname, password, conpassword);
     if (password != conpassword) {
       showError();
     } else {
@@ -42,8 +42,7 @@ function register() {
       });
     }
   };
-  const [fname, setFname] = useState("");
-  const [lname, setLname] = useState("");
+
   const [email, setEmail] = useState("");
   const [displayname, setDisplayname] = useState("");
   const [password, setPassword] = useState("");
@@ -62,38 +61,6 @@ function register() {
           <h1>Register</h1>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6 mb-8">
-          <div className="form-flname flex items-center justify-center gap-2">
-            <label
-              htmlFor="firstname"
-              className="input input-bordered  flex items-center gap-2 w-40"
-            >
-              <input
-                type="text"
-                id="fname"
-                name="fname"
-                className="grow overflow-hidden"
-                placeholder="First-Name"
-                value={fname}
-                onChange={(e) => setFname(e.target.value)}
-                required
-              />
-            </label>
-            <label
-              htmlFor="lastname"
-              className="input input-bordered  flex items-center gap-2 w-40 font"
-            >
-              <input
-                type="text"
-                id="lname"
-                name="lname"
-                className="grow overflow-hidden"
-                value={lname}
-                onChange={(e) => setLname(e.target.value)}
-                placeholder="Last-Name"
-                required
-              />
-            </label>
-          </div>
           <div className="form-group">
             <label
               htmlFor="email"
@@ -106,7 +73,7 @@ function register() {
                 className="grow overflow-hidden"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email ( gmail , hotmail )"
+                placeholder="Email ( user@email.com )"
                 required
               />
             </label>
@@ -175,7 +142,14 @@ function register() {
               <input type="checkbox" className="checkbox" required />
             </label>
           </div>
-          <div className="text-right">
+          <div
+            className="text-right"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <label className="not-match text-sx font-semibold text-red-700 hidden">
               invalid password not match
             </label>
