@@ -1,20 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Select.css";
 
 const URL = "http://localhost:5000/api/auth";
 
 function Select() {
-    // useEffect(() => {
-    //   const check = localStorage.getItem("customer");
-    //   console.log("Customer Token : ", check);
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const check = localStorage.getItem("customer");
+    console.log("Customer Token : ", check);
 
-    //   if (!check) {
-    //     window.location.href = "/";
-    //     return;
-    //   }
-    // });
+    if (!check) {
+      navigate("/");
+      return;
+    }
+  });
 
   return (
     <section id="select-page" className="min-h-screen">

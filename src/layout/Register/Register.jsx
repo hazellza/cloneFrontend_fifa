@@ -9,6 +9,16 @@ const URL = "http://localhost:5000/api/customer";
 
 function register() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const check = localStorage.getItem("customer");
+    console.log("Customer Token : ", check);
+    if (check) {
+      navigate("/select");
+      return;
+    }
+  }, []);
+
   const showError = () => {
     document.querySelector(".not-match").classList.remove("hidden");
   };
@@ -152,7 +162,14 @@ function register() {
               />
             </label>
           </div>
-          <div className="checkbox-confirm flex justify-end">
+          <div
+            className="checkbox-confirm flex justify-end"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <label className="label cursor-pointer gap-2 -mt-4 -mb-6">
               <span className="label text-sm">Confirm</span>
               <input type="checkbox" className="checkbox" required />
@@ -171,9 +188,22 @@ function register() {
               Register
             </button>
           </div>
-          <div className="text-end">
+          <div
+            className="text-end"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <label className="text-sm">
-              Already have an account?<a href="/" className="font-bold ml-1 underline underline-offset-1">Sign in</a>
+              Already have an account?
+              <a
+                href="/"
+                className="font-bold ml-1 underline underline-offset-1"
+              >
+                Sign in
+              </a>
             </label>
           </div>
         </form>

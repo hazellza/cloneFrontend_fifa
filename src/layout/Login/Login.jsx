@@ -7,18 +7,18 @@ import Swal from "sweetalert2";
 const URL = "http://localhost:5000/api/auth";
 
 function Login() {
-  // useEffect(() => {
-  //   const check = localStorage.getItem("customer");
-  //   console.log("Customer Token : ", check);
-  //   if (check) {
-  //     window.location.href = "/select";
-  //     return;
-  //   }
-  // }, []);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const check = localStorage.getItem("customer");
+    console.log("Customer Token : ", check);
+    if (check) {
+      navigate("/select");
+      return;
+    }
+  }, []);
 
   const showError = () => {
     document.querySelector(".error-message").classList.remove("hidden");
@@ -64,7 +64,7 @@ function Login() {
             timer: 1500,
           }).then(() => {
             localStorage.setItem("customer", JSON.stringify(result));
-            navigate("/select")
+            navigate("/select");
           });
         })
         .catch((e) => {
@@ -195,7 +195,14 @@ function Login() {
               </svg>
             </label>
           </div>
-          <div className="text-end">
+          <div
+            className="text-end"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <label className="text-sm">
               Don't have an account?
               <a

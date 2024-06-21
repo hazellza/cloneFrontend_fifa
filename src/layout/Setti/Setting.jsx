@@ -1,8 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Setting.css";
 import Navbar from "../../components/Navbar/Navbar";
 
 function Setting() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const check = localStorage.getItem("customer");
+    console.log("Customer Token : ", check);
+
+    if (!check) {
+      navigate("/");
+      return;
+    }
+  });
+
   return (
     <section id="setting-page" className="min-h-screen">
       <Navbar></Navbar>
