@@ -7,10 +7,6 @@ import Swal from "sweetalert2";
 const URL = "http://localhost:5000/api/auth";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
   useEffect(() => {
     const check = localStorage.getItem("customer");
     console.log("Customer Token : ", check);
@@ -19,6 +15,10 @@ function Login() {
       return;
     }
   }, []);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const showError = () => {
     document.querySelector(".error-message").classList.remove("hidden");
@@ -29,13 +29,12 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     console.log(email, password);
 
     if (!email || !password) {
       showError();
     } else if (email || password) {
-      delError();
+      delError();      
       fetch(URL + "/login", {
         method: "POST",
         headers: {
