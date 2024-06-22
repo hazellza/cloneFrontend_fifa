@@ -56,7 +56,7 @@ function Login() {
         .then((result) => {
           console.log("SignIn success : ", result);
           Swal.fire({
-            position: "top-end",
+            position: "center",
             icon: "success",
             title: "Your work has been saved",
             showConfirmButton: false,
