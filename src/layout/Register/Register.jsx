@@ -13,6 +13,7 @@ function register() {
   const [displayname, setDisplayname] = useState("");
   const [password, setPassword] = useState("");
   const [conpassword, setConpassword] = useState("");
+  const [errorMessage, setErrormessage] = useState("");
 
   useEffect(() => {
     const check = localStorage.getItem("customer");
@@ -23,31 +24,20 @@ function register() {
     }
   }, []);
 
-  const showError = () => {
-    document.querySelector(".not-match").classList.remove("hidden");
-  };
-
-  const passLeast = () => {
-    document.querySelector(".pass-least").classList.remove("hidden");
-  };
-
-  const delError = () => {
-    document.querySelector(".not-match").classList.add("hidden");
-    document.querySelector(".pass-least").classList.add("hidden");
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    delError();
     const pass64 = btoa(password);
 
     console.log("fetch : ", email, displayname);
-    if (password != conpassword) {
-      showError();
+    if (password !== conpassword) {
+      setErrormessage("Invalid password, not match");
+      document.querySelector('.icon-error').classList.remove('hidden')
     } else if (password.length < 6) {
-      passLeast();
+      setErrormessage("Password must be at least 6 characters");
+      document.querySelector('.icon-error').classList.remove('hidden')
     } else {
-      delError();
+      setErrormessage("");
+      document.querySelector('.icon-error').classList.add('hidden')
       fetch(URL + "/register", {
         method: "POST",
         headers: {
@@ -83,7 +73,7 @@ function register() {
           Swal.fire({
             icon: "error",
             title: "SignUp Fail",
-            text: e.message
+            text: e.message,
           });
         });
     }
@@ -178,14 +168,22 @@ function register() {
               <input type="checkbox" className="checkbox" required />
             </label>
           </div>
-          <div className="text-right -mb-10">
-            <label className="not-match text-sm font-semibold text-red-700 max-sm:text-xs hidden">
-              invalid password not match
-            </label>
-          </div>
-          <div className="text-right">
-            <label className="pass-least text-sm font-semibold text-red-700 max-sm:text-xs hidden ">
-              Password must be at least 6
+          <div className="grid justify-items-end -mb-10">
+            <label className="not-match flex items-center gap-1 text-sm font-semibold text-red-700 max-sm:text-xs ">
+              {errorMessage}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon-error stroke-current shrink-0 h-6 w-6 opacity-70 hidden"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
             </label>
           </div>
           <div className="flex justify-center">

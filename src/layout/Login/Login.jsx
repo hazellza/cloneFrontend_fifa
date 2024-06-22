@@ -177,7 +177,7 @@ function Login() {
             </label>
           </div>
           <div className="error-message text-red-700 grid justify-items-end hidden">
-            <label className="text-xs flex items-center gap-1 font-semibold">
+            <label className="text-sm flex items-center gap-1 font-semibold max-sm:text-xs">
               Please Input email or password
               <svg
                 xmlns="http://www.w3.org/2000/svg"
