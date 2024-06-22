@@ -41,7 +41,7 @@ function register() {
     delError();
     const pass64 = btoa(password);
 
-    console.log("Create user success. : ", email, displayname);
+    console.log("fetch : ", email, displayname);
     if (password != conpassword) {
       showError();
     } else if (password.length < 6) {
@@ -76,6 +76,14 @@ function register() {
             confirmButtonText: "OK",
           }).then(() => {
             navigate("/");
+          });
+        })
+        .catch((e) => {
+          console.log("**CATCH Error(SignUp) : ", e);
+          Swal.fire({
+            icon: "error",
+            title: "SignUp Fail",
+            text: e.message
           });
         });
     }
@@ -170,20 +178,13 @@ function register() {
               <input type="checkbox" className="checkbox" required />
             </label>
           </div>
-          <div className="text-right">
-            <label className="not-match text-sx font-semibold text-red-700 hidden">
+          <div className="text-right -mb-10">
+            <label className="not-match text-sm font-semibold text-red-700 max-sm:text-xs hidden">
               invalid password not match
             </label>
           </div>
-          <div
-            className="text-right"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <label className="pass-least text-sx font-semibold text-red-700 hidden">
+          <div className="text-right">
+            <label className="pass-least text-sm font-semibold text-red-700 max-sm:text-xs hidden ">
               Password must be at least 6
             </label>
           </div>
