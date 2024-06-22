@@ -9,6 +9,10 @@ const URL = "http://localhost:5000/api/customer";
 
 function register() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [displayname, setDisplayname] = useState("");
+  const [password, setPassword] = useState("");
+  const [conpassword, setConpassword] = useState("");
 
   useEffect(() => {
     const check = localStorage.getItem("customer");
@@ -22,31 +26,60 @@ function register() {
   const showError = () => {
     document.querySelector(".not-match").classList.remove("hidden");
   };
-  const delError = () => {
-    document.querySelector(".not-match").classList.add("hidden");
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(email, displayname, password, conpassword);
-    if (password != conpassword) {
-      showError();
-    } else {
-      delError();
-      Swal.fire({
-        title: "Register success!!",
-        text: "Do you want to continue",
-        icon: "success",
-        confirmButtonText: "OK",
-      }).then(() => {
-        navigate("/");
-      });
-    }
+
+  const passLeast = () => {
+    document.querySelector(".pass-least").classList.remove("hidden");
   };
 
-  const [email, setEmail] = useState("");
-  const [displayname, setDisplayname] = useState("");
-  const [password, setPassword] = useState("");
-  const [conpassword, setConpassword] = useState("");
+  const delError = () => {
+    document.querySelector(".not-match").classList.add("hidden");
+    document.querySelector(".pass-least").classList.add("hidden");
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    delError();
+    const pass64 = btoa(password);
+
+    console.log("Create user success. : ", email, displayname);
+    if (password != conpassword) {
+      showError();
+    } else if (password.length < 6) {
+      passLeast();
+    } else {
+      delError();
+      fetch(URL + "/register", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          displayname: displayname,
+          email: email,
+          password: pass64,
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        })
+        .then((result) => {
+          console.log("SignUp success : ", result);
+          Swal.fire({
+            title: "Register success!!",
+            text: "Do you want to continue",
+            icon: "success",
+            confirmButtonText: "OK",
+          }).then(() => {
+            navigate("/");
+          });
+        });
+    }
+  };
 
   return (
     <section
@@ -152,6 +185,18 @@ function register() {
           >
             <label className="not-match text-sx font-semibold text-red-700 hidden">
               invalid password not match
+            </label>
+          </div>
+          <div
+            className="text-right"
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <label className="pass-least text-sx font-semibold text-red-700 hidden">
+              Password must be at least 6
             </label>
           </div>
           <div className="flex justify-center">
