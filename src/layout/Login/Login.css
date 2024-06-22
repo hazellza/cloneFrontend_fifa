@@ -26,10 +26,48 @@
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  width: 350px;
+  width: 370px;
   margin-bottom: 150px;
 }
 
 #login-page a {
   color: rgb(26, 32, 114);
 }
+
+
+@media only screen and (max-width: 1280px) {
+  #login-page .translucent-bg {
+    background-color: rgba(255, 255, 255, 0.5); /* สีขาวพร้อมความโปร่งใส 80% */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 340px;
+    margin-bottom: 150px;
+  }
+}
+
+/* สำหรับหน้าจอที่ต่ำกว่า 992px */
+@media only screen and (max-width: 1024px) {
+  #login-page .translucent-bg {
+    background-color: rgba(255, 255, 255, 0.5); /* สีขาวพร้อมความโปร่งใส 80% */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 320px;
+    margin-bottom: 150px;
+  }
+}
+
+/* สำหรับหน้าจอที่ต่ำกว่า 768px */
+@media only screen and (max-width: 768px) {
+  #login-page .translucent-bg {
+    background-color: rgba(255, 255, 255, 0.5); /* สีขาวพร้อมความโปร่งใส 80% */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    margin-bottom: 150px;
+  }
+
+}
+

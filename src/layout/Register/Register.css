@@ -1,30 +1,66 @@
 #register-page {
-    background-image: linear-gradient(135deg, rgba(67, 188, 52, 1) 0%, rgba(18, 89, 71, 1) 100%);
-  }
+  background-image: linear-gradient(
+    135deg,
+    rgba(67, 188, 52, 1) 0%,
+    rgba(18, 89, 71, 1) 100%
+  );
+}
 
-.translucent-bg {
+#register-page .translucent-bg {
+  background-color: rgba(255, 255, 255, 0.5); /* สีขาวพร้อมความโปร่งใส 80% */
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  width: 370px;
+  margin-bottom: 120px;
+}
+
+.icon-register .bg-slate-50 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.icon-register .bg-slate-50:hover {
+  background-color: #e2e8f0;
+}
+
+#register-page a {
+  color: rgb(26, 32, 114);
+}
+
+@media only screen and (max-width: 1280px) {
+  #register-page .translucent-bg {
     background-color: rgba(255, 255, 255, 0.5); /* สีขาวพร้อมความโปร่งใส 80% */
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    width: 350px;
+    width: 340px;
     margin-bottom: 120px;
   }
+}
 
-  .icon-register .bg-slate-50 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+/* สำหรับหน้าจอที่ต่ำกว่า 992px */
+@media only screen and (max-width: 1024px) {
+  #register-page .translucent-bg {
+    background-color: rgba(255, 255, 255, 0.5); /* สีขาวพร้อมความโปร่งใส 80% */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 320px;
+    margin-bottom: 120px;
   }
-  
-  .icon-register .bg-slate-50:hover {
-    background-color: #e2e8f0; 
+}
+
+/* สำหรับหน้าจอที่ต่ำกว่า 768px */
+@media only screen and (max-width: 768px) {
+  #register-page .translucent-bg {
+    background-color: rgba(255, 255, 255, 0.5); /* สีขาวพร้อมความโปร่งใส 80% */
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    margin-bottom: 120px;
   }
-
-  #register-page a {
-    color: rgb(26, 32, 114);
-  }
-
-
-  
+}

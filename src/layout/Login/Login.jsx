@@ -108,7 +108,7 @@ function Login() {
                 type="text"
                 id="email"
                 name="email"
-                className="grow"
+                className="grow max-sm:text-sm"
                 placeholder="customer@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -138,7 +138,7 @@ function Login() {
                 type="password"
                 id="password"
                 name="password"
-                className="grow"
+                className="grow max-sm:text-sm"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -195,26 +195,22 @@ function Login() {
               </svg>
             </label>
           </div>
-          <div
-            className="text-end"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <label className="text-sm">
+          <div className="text-center">
+            <label className="text-sm max-sm:text-xs">
               Don't have an account?
               <a
                 href={"/register"}
-                className="font-bold ml-1 underline underline-offset-1"
+                className="font-bold ml-1 underline underline-offset-1 max-sm:text-sm"
               >
                 Sign up
               </a>
             </label>
           </div>
           <div className="flex justify-center">
-            <button type="submit" className="btn btn-neutral w-64 text-white ">
+            <button
+              type="submit"
+              className="btn btn-neutral w-64 text-white max-sm:w-36 max-lg:w-44 max-xl:w-56"
+            >
               Login
             </button>
           </div>
