@@ -19,6 +19,7 @@ function Setting() {
       return;
     }
   });
+  
   const navigate = useNavigate();
   let data = localStorage.getItem("customer");
   var customer = JSON.parse(data);
