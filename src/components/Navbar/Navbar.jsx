@@ -3,10 +3,13 @@ import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const URL = "http://localhost:5000/api/auth";
+const URL = "http://localhost:5000/api/customer";
 
 function Navbar() {
   const navigate = useNavigate();
+  let data = localStorage.getItem("customer");
+  var customer = JSON.parse(data);
+  var name = customer.customer[0].result.displayname;
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -51,7 +54,9 @@ function Navbar() {
     <section id="navbar">
       <div className="navbar bg-base-100 flex justify-between items-center rounded-box shadow-lg">
         <div className="flex">
-          <a href="/select" className="btn btn-ghost text-2xl font-bold topic">Green World</a>
+          <a href="/select" className="btn btn-ghost text-2xl font-bold topic">
+            Green World
+          </a>
         </div>
         <div className="flex">
           <div className="dropdown dropdown-end">
