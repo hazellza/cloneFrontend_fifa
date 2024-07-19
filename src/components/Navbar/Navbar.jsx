@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const URL = "http://localhost:5000/api/customer";
+const UrlAuth = "http://localhost:5000/api/auth";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Navbar() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    fetch(URL + "/logout", {
+    fetch(UrlAuth + "/logout", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
