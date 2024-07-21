@@ -31,13 +31,13 @@ function register() {
     console.log("fetch : ", email, displayname);
     if (password !== conpassword) {
       setErrormessage("Invalid password, not match");
-      document.querySelector('.icon-error').classList.remove('hidden')
+      document.querySelector(".icon-error").classList.remove("hidden");
     } else if (password.length < 6) {
       setErrormessage("Password must be at least 6 characters");
-      document.querySelector('.icon-error').classList.remove('hidden')
+      document.querySelector(".icon-error").classList.remove("hidden");
     } else {
       setErrormessage("");
-      document.querySelector('.icon-error').classList.add('hidden')
+      document.querySelector(".icon-error").classList.add("hidden");
       fetch(URL + "/register", {
         method: "POST",
         headers: {
