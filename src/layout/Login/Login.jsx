@@ -34,7 +34,7 @@ function Login() {
     if (!email || !password) {
       showError();
     } else if (email || password) {
-      delError();      
+      delError();
       fetch(URL + "/login", {
         method: "POST",
         headers: {
